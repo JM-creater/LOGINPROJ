@@ -9,10 +9,15 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         $confirmpassword = $_POST["confirmpassword"];
-        $duplicate = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' OR email = '$email'");
+        $duplicate = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' OR email = '$email' OR name = '$name'");
+        $same = mysqli_query($conn, "SELECT * FROM tb_user WHERE name = '$name'");
         if(mysqli_num_rows($duplicate) > 0)
         {
             echo "<script> alert('Username or Email Has Already Taken'); </script>";
+        } 
+        if (mysqli_num_rows($same) > 0)
+        {
+            echo "<script> alert('Name Has Already Taken'); </script>";
         }
         else
         {
